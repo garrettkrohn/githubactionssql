@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     name: sql test
     env:
-      DB_DATABASE: kipsu_stage_v4
+      DB_DATABASE: test
       DB_USER: root
       DB_PASSWORD: 123
     steps:
       - name: sql test
         run: |
-          sudo /etc/init.d/mysql start \
-          mysql -h 127.0.0.1 -p ${{env.DB_PASSWORD}} -u ${{env.DB_USER}} ${{ env.DB_DATABASE }} < ./test.sql ;
+          sudo /etc/init.d/mysql start
+          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
