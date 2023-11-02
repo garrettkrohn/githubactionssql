@@ -23,11 +23,12 @@ jobs:
       DB_DATABASE: test
       DB_USER: root
       DB_PASSWORD: "123"
+      DB_HOST: "4.tcp.ngrok.io"
     steps:
       - name: sql test
         run: |
           # sudo /etc/init.d/mysql start
-          mysql -e 'SELECT * FROM company LIMIT 5'; -h4.tcp.ngrok.io:17675 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+          mysql -e 'SELECT * FROM company LIMIT 5'; -h${{ env.DB_HOST}} -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 
 # name: CI
 # on: push
