@@ -19,8 +19,12 @@ jobs:
     needs: sql-review
     runs-on: ubuntu-latest
     name: sql test
+    enb:
+      DB_DATABASE: kipsu_stage_v4
+      DB_USER: root
+      DB_PASSWORD: 123
     steps:
       - name: sql test
         run: |
           sudo /etc/init.d/mysql start \
-          cat ~/code/github_sql_example/github-actions-test/enableQuore.sql | mysql -h 127.0.0.1 -p 123 -u root kipsu_stage_v4
+          cat ~/code/github_sql_example/github-actions-test/enableQuore.sql | mysql -h 127.0.0.1 -p ${{env.DB_PASSWORD}} -u ${{env.DB_USER}} ${{ env.DB_DATABASE }};
