@@ -19,7 +19,7 @@ jobs:
     needs: sql-review
     runs-on: ubuntu-latest
     name: sql test
-    enb:
+    env:
       DB_DATABASE: kipsu_stage_v4
       DB_USER: root
       DB_PASSWORD: 123
