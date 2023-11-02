@@ -23,4 +23,4 @@ jobs:
       - name: sql test
         run: |
           sudo /etc/init.d/mysql start
-          mysql -h 127.0.0.1 -p -u root kipsu_stage_v4 < github-actions-test/enableQuore.sql
+          mysql -h 127.0.0.1 -p -u root kipsu_stage_v4 < ./github-actions-test/enableQuore.sql
