@@ -1,1 +1,1 @@
-select * from location limit 500;
+select * from location 500;
