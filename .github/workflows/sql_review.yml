@@ -15,9 +15,3 @@ jobs:
           # template-id: "<SQL review rule template id>"
           database-type: "MYSQL"
           file-pattern: ^github-actions-test/.*\.sql$
-  sql-setup:
-    steps:
-      - name: Set up mysql
-        run: |
-          sudo /etc/init.d/mysql start
-          mysql -h 127.0.0.1 -p -u root kipsu_stage_v4 < github-actions-test/enableQuore.sql
