@@ -27,4 +27,4 @@ jobs:
       - name: sql test
         run: |
           sudo /etc/init.d/mysql start
-          mysql -e 'SELECT * FROM company LIMIT 5'; -h 127.0.0.1 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+          mysql -e 'SELECT * FROM company LIMIT 5'; -h127.0.0.1 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
