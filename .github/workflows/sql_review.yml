@@ -27,7 +27,7 @@ jobs:
       - name: sql test
         run: |
           # sudo /etc/init.d/mysql start
-          mysql -e 'SELECT * FROM company LIMIT 5'; -hhttps://horse-magical-notably.ngrok-free.app -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+          mysql -e 'SELECT * FROM company LIMIT 5'; -h4.tcp.ngrok.io:17675 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 
 # name: CI
 # on: push
