@@ -16,7 +16,7 @@ jobs:
   #         database-type: "MYSQL"
   #         file-pattern: ^github-actions-test/.*\.sql$
   sql-test:
-    needs: sql-review
+    # needs: sql-review
     runs-on: ubuntu-latest
     name: sql test
     env:
