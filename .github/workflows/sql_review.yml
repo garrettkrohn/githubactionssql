@@ -1,48 +1,48 @@
-# on: [pull_request]
-#
-# jobs:
-#   sql-review:
-#     runs-on: ubuntu-latest
-#     name: SQL Review
-#     steps:
-#       - uses: actions/checkout@v3
-#       - name: Check SQL
-#         # You can change it to a specific version like bytebase/sql-review-action@0.0.4
-#         # We suggest using the latest version through the tag. Check it at https://github.com/Bytebase/sql-review-action/tags
-#         uses: bytebase/sql-review-action@main
-#         with:
-#           override-file-path: bb.sql_review.dev.yml
-#           # template-id: "<SQL review rule template id>"
-#           database-type: "MYSQL"
-#           file-pattern: ^github-actions-test/.*\.sql$
-#   sql-test:
-#     needs: sql-review
-#     runs-on: ubuntu-latest
-#     name: sql test
-#     env:
-#       DB_DATABASE: test
-#       DB_USER: root
-#       DB_PASSWORD: "123"
-#     steps:
-#       - name: sql test
-#         run: |
-#           sudo /etc/init.d/mysql start
-#           mysql -e 'SELECT * FROM company LIMIT 5'; -h127.0.0.1 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
-
-name: CI
 on: push
+
 jobs:
-  build:
+  # sql-review:
+  #   runs-on: ubuntu-latest
+  #   name: SQL Review
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Check SQL
+  #       # You can change it to a specific version like bytebase/sql-review-action@0.0.4
+  #       # We suggest using the latest version through the tag. Check it at https://github.com/Bytebase/sql-review-action/tags
+  #       uses: bytebase/sql-review-action@main
+  #       with:
+  #         override-file-path: bb.sql_review.dev.yml
+  #         # template-id: "<SQL review rule template id>"
+  #         database-type: "MYSQL"
+  #         file-pattern: ^github-actions-test/.*\.sql$
+  sql-test:
+    # needs: sql-review
     runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: 123
-          MYSQL_DATABASE: test
-        ports:
-          - "8888:3306"
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    name: sql test
+    env:
+      DB_DATABASE: test
+      DB_USER: root
+      DB_PASSWORD: "123"
     steps:
-      - uses: actions/checkout@v1
-      - run: mysql -h 127.0.0.1 -u root -p123 -e 'CREATE DATABASE IF NOT EXISTS test;'
+      - name: sql test
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -e 'SELECT * FROM company LIMIT 5'; -h127.0.0.1 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+
+# name: CI
+# on: push
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     services:
+#       mysql:
+#         image: mysql:8.0
+#         env:
+#           MYSQL_ROOT_PASSWORD: 123
+#           MYSQL_DATABASE: test
+#         ports:
+#           - "8888:3306"
+#         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+#     steps:
+#       - uses: actions/checkout@v1
+#       - run: mysql -h 127.0.0.1 -u root -p123 -e 'CREATE DATABASE IF NOT EXISTS test;'
