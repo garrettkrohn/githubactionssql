@@ -27,4 +27,4 @@ jobs:
       - name: sql test
         run: |
           sudo /etc/init.d/mysql start \
-          mysql -h 127.0.0.1 -p ${{env.DB_PASSWORD}} -u ${{env.DB_USER}} ${{ env.DB_DATABASE }} < test.sql ;
+          mysql -h 127.0.0.1 -p ${{env.DB_PASSWORD}} -u ${{env.DB_USER}} ${{ env.DB_DATABASE }} < ./test.sql ;
