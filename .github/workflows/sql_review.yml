@@ -14,4 +14,35 @@ jobs:
           override-file-path: bb.sql_review.dev.yml
           # template-id: "<SQL review rule template id>"
           database-type: "MYSQL"
-          file-pattern: ^github_actions_test/.*\.sqls
+          file-pattern: ^github-actions-test/.*\.sql$
+  # sql-test:
+  #   # needs: sql-review
+  #   runs-on: ubuntu-latest
+  #   name: sql test
+  #   env:
+  #     DB_DATABASE: kipsu_stage_v4
+  #     DB_USER: root
+  #     DB_PASSWORD: "123"
+  #     DB_HOST: "ec2-54-92-143-225.compute-1.amazonaws.com"
+  #   steps:
+  #     - name: sql test
+  #       run: |
+  #         # sudo /etc/init.d/mysql start
+  #         mysql -e 'SELECT * FROM company LIMIT 5'; -h${{ env.DB_HOST}} -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+# name: CI
+# on: push
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     services:
+#       mysql:
+#         image: mysql:8.0
+#         env:
+#           MYSQL_ROOT_PASSWORD: 123
+#           MYSQL_DATABASE: test
+#         ports:
+#           - "8888:3306"
+#         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+#     steps:
+#       - uses: actions/checkout@v1
+#       - run: mysql -h 127.0.0.1 -u root -p123 -e 'CREATE DATABASE IF NOT EXISTS test;'
